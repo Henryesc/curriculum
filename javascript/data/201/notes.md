@@ -37,5 +37,5 @@ const cars = [
         color: 'yellow',
         milage: 67302,
         isNew: false
-        }
+        },
 ];
