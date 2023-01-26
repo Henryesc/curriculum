@@ -39,4 +39,4 @@ Browsers can read files or you can start a server in VS Code with **Go LIVE**
 <section> - defines a section area for child elements
 ```
 #### tags inside of `<head>`
-<link> - used to link a stylesheet, only found in the `<head>`
+<link> link- used to link a stylesheet, only found in the head`<head>`
