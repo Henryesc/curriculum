@@ -7,6 +7,6 @@ body {
   p {
     color: red;
   }
- li {
+  .priority{
     color: rebeccapurple
   }
