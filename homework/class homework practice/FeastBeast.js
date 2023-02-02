@@ -1,0 +1,3 @@
+function feast(beast, dish) {
+    
+    }
