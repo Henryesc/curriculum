@@ -1,0 +1,21 @@
+* {
+    background-color: rgb(219, 211, 218);
+}
+
+ul {
+background-color: aqua;
+color: rgb(15, 14, 14);
+list-style: none;
+}
+
+li{
+    background-color: crimson;
+    cursor: pointer;
+    padding: 20px;
+    color: white;
+}
+.app {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}

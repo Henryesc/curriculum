@@ -1,0 +1,41 @@
+* {
+    
+};
+
+body,
+html {
+    height: 100%;
+}
+
+.y-sticy {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    row-gap: 20px;
+    font: 2rem sans-serif ;
+}
+
+.header div{
+    background-color: cornflowerblue;
+    flex: 1;
+    height: 100px;
+}
+
+
+header {
+    column-gap: 20px;
+    display: flex;
+    padding: 20px;
+}
+
+
+.number {
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.btn-group {
+    justify-content: center;
+}
+

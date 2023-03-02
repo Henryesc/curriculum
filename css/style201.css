@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    }
+
+    body {
+        font-family: sans-serif;
+        font-size: 2rem;
+        }
+
+    .app {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    
+    .box {
+    align-items: center;
+    background-color: cornsilk;
+    display: flex;
+    height: 150px;
+    flex-basis: 33.33%;
+    justify-content: center;
+    width: 100px;
+    }
+
+    .b {
+    background-color: cornflowerblue;
+    }
+
+    .c {
+    background-color: Ipowderblue;
+    }
+
+    .d {
+    background-color: pink;
+    }
+
+    .e {
+    background-color: linen;
+    }
+
+    .f {
+    background-color: gainsboro;
+    }
+
+    .g {
+    background-color: lavender;
+    }
+
+    .h {
+    background-color: cadetblue;
+    }
+
+    .i {
+    background-color: papayawhip;
+    }

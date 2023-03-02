@@ -1,0 +1,48 @@
+* {
+    color: black;
+}
+
+.y-sticky {
+    display: flex;
+}
+
+.bg {
+    background-color:green ;
+    height: 200px;
+    margin: 100px;
+    color: white;
+}
+
+.window {
+    background-color: greenyellow;
+    height: 1100px;
+
+}
+
+header {
+    text-align: center;
+    font-size: 5rem;   
+}
+.dealer img {
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+    padding: 10px;
+}
+
+.player img{
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+    padding: 10px;
+}
+
+#results {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
