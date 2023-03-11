@@ -1,0 +1,11 @@
+* {
+
+}
+
+.y-sticky {
+    display: flex;
+}
+
+header {
+    font-size: 2rem;
+}
