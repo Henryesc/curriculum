@@ -1,0 +1,12 @@
+header {
+ font-size: 2rem;
+}
+
+
+.y-wrap{
+    display: flex;
+}
+
+#show-quote {
+    background-color: crimson;
+}
