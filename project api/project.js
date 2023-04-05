@@ -1,78 +1,190 @@
-let quote = document.getElementById('quote')
-let showQuote = document.getElementById('show-quote')
+let quote = document.getElementById("quote");
+let showQuote = document.getElementById("startQuiz");
+let ca = document.getElementById("character-author");
 
-showQuote.addEventListener('click', handleCLick)
-// showQuote.addEventListener('click', getShowQuotes)
+// ('https://api.gameofthronesquotes.xyz/v1/random/5')
+// ("https://api.breakingbadquotes.xyz/v1/quotes/5")
 
-let animeArray = []
-console.log(animeArray)
-let displayQuote = []
-let displayAuthor = []
-let showArray = []
-console.log(showArray)
+showQuote.addEventListener('click', cacheApi)
+// showQuote.addEventListener('click', caniDisplayQuotes)
 
+// window.onload = cacheApi();
 
-async function handleCLick() {
-    const anime = await getAnimeQuotes()
-    const show = await getShowQuotes()
-    
+let breakingbad = [];
+let displayQuote = [];
+let displayAuthor = [];
+let showArray = [];
+let selectedID = []
+let author = []
+let authorsArray = []
+let quoteIndex = []
+let authorIndex = []
+let score = 0
+let characterQuotesArray = []
+let breakingBadFetch = []
+console.log(breakingBadFetch)
+
+async function cacheApi() {
+  const anime = await getAnimeQuotes();
+  const show = await getShowQuotes();
+}
+
+/**
+ * It fetches the data from the API, then creates a button for each quote, and adds an event listener
+ * to each button.
+ */
+async function getAnimeQuotes() {
+  const request = await fetch("https://api.breakingbadquotes.xyz/v1/quotes/25");
+  const quotes = await request.json();
+  console.log(quotes)
+  breakingBadFetch.push(quotes)
+  /* Looping through an array of quotes and for each quote, it is destructuring the `author` and
+  `quote` properties from the current element `x` and assigning them to variables `author` and
+  `quote`. It also uses the `index` parameter to create a unique name for each button element. */
+  quotes.forEach((x, index) => {
+      const { author, quote } = x;
+      displayQuote.push(quote);
+      displayAuthor.push(author);
+      let div = document.createElement("div");
+      let animediv = document.getElementById("quote");
+      div.innerHTML = `<button class = "characterQuote" id=${author} name = "quote-${index}">${quote}</button>`;
+      animediv.appendChild(div);
+      let div1 = document.createElement("div");
+      let authorlen = author.length
+      if (x.author !== "" && authorlen < 25) {
+          div1.innerHTML = `<button class = "author" id = ${author} name = "author-${index}">${x.author}</button>`;
+          ca.appendChild(div1);
+        }
+      });
+      // caniDisplayQuotes()
+      characterQuotesArray = document.querySelectorAll(".characterQuote")
+      characterQuotesArray.forEach(characterQuoteBtn => {
+        characterQuoteBtn.addEventListener('click', () => {
+          selectedID = characterQuoteBtn.id
+          quoteIndex = characterQuoteBtn.name
+          let isCorrect = checkAnswer()
+          updateDisplay(isCorrect)
+        })
+        
+  })
+
+  authorsArray = document.querySelectorAll(".author")
+  authorsArray.forEach(authorBtn => {
+    authorBtn.addEventListener('click', () => {
+      author = authorBtn.id
+      authorIndex = authorBtn.name
+      let isCorrect = checkAnswer()
+      updateDisplay(isCorrect)
+    })
+  })
+}
+
+async function getShowQuotes() {
+  const request = await fetch(
+    "https://api.gameofthronesquotes.xyz/v1/random/25"
+    );
+    const response = await request.json();
+  response.forEach((x, index) => {
+    // const { quote, author, series } = x;
+    // console.log(sentence)
+    // console.log(character)
+    // const {sentence} = x;
+    // const {name, slug, house} = character
+    // const {name, slug, house} = x.character
+    // displayQuote.push(quote.quote);
+    // displayAuthor.push(author.author);
+    let quote = x.sentence
+    let author = x.character.name
+    displayQuote.push(quote);
+    displayAuthor.push(author);
+    let div = document.createElement("div");
+    let animediv = document.getElementById("quote");
+    div.innerHTML = `<button class = "characterQuote" id=${author} name = "quote-${index}">${quote}</button>`;
+    animediv.appendChild(div);
+    let div1 = document.createElement("div");
+    let authorlen = author.length
+    if (author !== "" && authorlen < 25) {
+      div1.innerHTML = `<button class = "author" id = ${author} name = "author-${index}">${author}</button>`;
+      ca.appendChild(div1);
+    }
+  });
+  characterQuotesArray = document.querySelectorAll(".characterQuote")
+  characterQuotesArray.forEach(characterQuoteBtn => {
+    characterQuoteBtn.addEventListener('click', () => {
+    selectedID = characterQuoteBtn.id
+    quoteIndex = characterQuoteBtn.name
+    let isCorrect = checkAnswer()
+    updateDisplay(isCorrect)
+   })
+   
+  })
+  authorsArray = document.querySelectorAll(".author")
+  authorsArray.forEach(authorBtn => {
+    authorBtn.addEventListener('click', () => {
+      author = authorBtn.id
+      authorIndex = authorBtn.name
+      let isCorrect = checkAnswer()
+      updateDisplay(isCorrect)
+    })
+  })
 }
 
 
-async function getAnimeQuotes() {
-    // const request = await fetch('https://animechan.vercel.app/api/random')
-    const request = await fetch ('https://animechan.vercel.app/api/quotes')
-    const quote = await request.json() 
-    console.log(quote)
-    quote.forEach(element => {
-        let anime = element.anime
-        let character = element.character
-        let quote = element.quote
-        displayQuote.push(quote)
-        displayAuthor.push(character)
-        // console.log(displayQuote)
-        if (displayQuote.length === 10) {
-            displayQuote.forEach(e => {
-                console.log(e)
-                let div = document.createElement("div")
-                let animediv = document.getElementById("anime")
-                div.innerHTML= 
-                `<button id=${character}>${e}</button>`
-                animediv.appendChild(div)
-                animeArray.push(quote)
-                console.log(animeArray)
-                // quote.forEach(e => {
-                //     let character = e.character
-                    // div.setAttribute("id",`${character}` )
-                // }) 
-            })
 
-        }
-    });
+// function caniDisplayQuotes() {
+//   breakingBadFetch.forEach((x, index) => {
+//     // const { author, quote } = x;
+//     let author = x.author
+//     let quote = x.quote
+//     displayQuote.push(quote);
+//     displayAuthor.push(author);
+//     let div = document.createElement("div");
+//     let animediv = document.getElementById("quote");
+//     div.innerHTML = `<button class = "characterQuote" id=${author} name = "quote-${index}">${quote}</button>`;
+//     animediv.appendChild(div);
+//     let div1 = document.createElement("div");
+//     // let authorlen = x.author.length
+//     // if (x.author !== "" && authorlen < 25) {
+//       div1.innerHTML = `<button class = "author" id = ${author} name = "author-${index}">${author}</button>`;
+//       ca.appendChild(div1);
+//     }
+//   );
+// }
+
+function checkAnswer() {
+  if (selectedID.length !== 0 && author.length !== 0) {
+    if ( selectedID == author){
+      selectedID = []
+      author = []
+      return true
+    } else {
+      selectedID = []
+      author = []
+      return false
     }
+  }
+} 
+
+
+function updateDisplay(isCorrect) {
+  let selectedQuote = document.getElementsByName(`${quoteIndex}`)
+  let authorBtn = document.getElementsByName(`${authorIndex}`)
+  if (isCorrect === true){
+    selectedQuote[0].style.backgroundColor = 'green'
+    authorBtn[0].style.backgroundColor = 'green'
+    authorBtn[0].disabled = true
+    selectedQuote[0].disabled = true
+    quoteIndex = []
+    authorIndex = []
     
-    async function getShowQuotes () {
-        const request = await fetch ("https://web-series-quotes-api.deta.dev/quote/?count=40")
-        const response = await request.json()
-        console.log(response)
-        response.forEach(element => {
-            let showQuotes = element.quote
-            let author = element.author
-            let series = element.series
-            displayQuote.push(showQuotes)
-            displayAuthor.push(author)
-        });
-        console.log(displayAuthor)
-        displayAuthor.forEach(e => {
-            let show = document.getElementById('show')
-            console.log(e)
-            let div = document.createElement("button")
-            div.innerHTML = 
-            `<h3>${e}</h3>`
-            // // showArray.push()
-            show.appendChild(div)
-        })
-    }
-    const characterValue = document.getElementById(`${displayAuthor[0]}`)
+  }
 
-//  characterValue.addEventListener('click', )
+  else if (isCorrect === false){
+    selectedQuote[0].style.backgroundColor = 'crimson'
+    authorBtn[0].style.backgroundColor = 'crimson'
+    authorBtn[0].disabled = true
+    selectedQuote[0].disabled = true
+    quoteIndex = []
+    authorIndex = []
+  }
+}
